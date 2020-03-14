@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PI_BO.Models
 {
@@ -10,7 +6,7 @@ namespace PI_BO.Models
     {
         public int ID { get; set; }
         [StringLength(50)]
-        [Display(Name="Nome")]
+        [Display(Name = "Nome")]
         public string Nome { get; set; }
         [Display(Name = "Preço")]
         public decimal PrecoBase { get; set; }
@@ -22,6 +18,5 @@ namespace PI_BO.Models
         public bool Quente { get; set; }
         [Display(Name = "Frio?")]
         public bool Frio { get; set; }
-
     }
 }

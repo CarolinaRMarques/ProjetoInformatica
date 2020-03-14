@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PI_BO.Models
 {
@@ -12,7 +8,5 @@ namespace PI_BO.Models
         [StringLength(50)]
         [Display(Name = "Nome")]
         public string Nome { get; set; }
-        [Display(Name = "Produtos")]
-        public virtual IList<Produto> Produto { get; set; }
     }
 }

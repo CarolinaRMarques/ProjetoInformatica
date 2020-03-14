@@ -61,7 +61,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nome" Type="nchar" MaxLength="124" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="Encomenda">
           <Key>
@@ -88,7 +88,7 @@ warning 6002: The table/view 'ProjInformatica.dbo.Encomenda_Produto_Ingrediente'
           <Property Name="ProdutoID" Type="int" Nullable="false" />
           <Property Name="IngredienteID" Type="int" Nullable="false" />
           <Property Name="Quantidade" Type="int" Nullable="false" />
-          <Property Name="PrecoBase" Type="int" Nullable="false" />
+          <Property Name="PrecoBase" Type="decimal" Precision="10" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Ingrediente">
           <Key>
@@ -109,8 +109,8 @@ warning 6002: The table/view 'ProjInformatica.dbo.Encomenda_Produto_Ingrediente'
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="PrecoBase" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Imagem" Type="nchar" MaxLength="1024" />
-          <Property Name="ClasseID" Type="int" />
+          <Property Name="Imagem" Type="varchar" MaxLength="1024" />
+          <Property Name="ClasseID" Type="int" Nullable="false" />
           <Property Name="ProdutoPaiID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -229,8 +229,8 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Produto_Classe">
-          <End Role="Classe" Type="Self.Classe" Multiplicity="0..1" />
+        <Association Name="FK_Produto_Classe1">
+          <End Role="Classe" Type="Self.Classe" Multiplicity="1" />
           <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Classe">
@@ -335,7 +335,7 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
             <End Role="Produto" EntitySet="Produto" />
             <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
           </AssociationSet>
-          <AssociationSet Name="FK_Produto_Classe" Association="Self.FK_Produto_Classe">
+          <AssociationSet Name="FK_Produto_Classe1" Association="Self.FK_Produto_Classe1">
             <End Role="Classe" EntitySet="Classe" />
             <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
@@ -356,79 +356,23 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjInformaticaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ProjInformaticaEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AspNetRoles" EntityType="ProjInformaticaModel.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="ProjInformaticaModel.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="ProjInformaticaModel.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="ProjInformaticaModel.AspNetUsers" />
-          <EntitySet Name="Encomenda" EntityType="ProjInformaticaModel.Encomenda" />
-          <EntitySet Name="Ingrediente" EntityType="ProjInformaticaModel.Ingrediente" />
-          <EntitySet Name="Encomenda_Produto_Ingrediente" EntityType="ProjInformaticaModel.Encomenda_Produto_Ingrediente" />
-          <EntitySet Name="ProdutoIngrediente" EntityType="ProjInformaticaModel.ProdutoIngrediente" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="ProjInformaticaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="ProjInformaticaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Encomenda_AspNetUsers" Association="ProjInformaticaModel.FK_Encomenda_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Encomenda" EntitySet="Encomenda" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Encomenda" Association="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Encomenda">
-            <End Role="Encomenda" EntitySet="Encomenda" />
-            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Ingrediente" Association="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Ingrediente">
-            <End Role="Ingrediente" EntitySet="Ingrediente" />
-            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProdutoIngrediente_Ingrediente" Association="ProjInformaticaModel.FK_ProdutoIngrediente_Ingrediente">
-            <End Role="Ingrediente" EntitySet="Ingrediente" />
-            <End Role="ProdutoIngrediente" EntitySet="ProdutoIngrediente" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="ProjInformaticaModel.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="Classe" EntityType="ProjInformaticaModel.Classe" />
-          <EntitySet Name="Produto" EntityType="ProjInformaticaModel.Produto" />
-          <AssociationSet Name="FK_Produto_Classe" Association="ProjInformaticaModel.FK_Produto_Classe">
-            <End Role="Classe" EntitySet="Classe" />
-            <End Role="Produto" EntitySet="Produto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Produto" Association="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Produto">
-            <End Role="Produto" EntitySet="Produto" />
-            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Produto_Produto" Association="ProjInformaticaModel.FK_Produto_Produto">
-            <End Role="Produto" EntitySet="Produto" />
-            <End Role="Produto1" EntitySet="Produto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProdutoIngrediente_Produto" Association="ProjInformaticaModel.FK_ProdutoIngrediente_Produto">
-            <End Role="Produto" EntitySet="Produto" />
-            <End Role="ProdutoIngrediente" EntitySet="ProdutoIngrediente" />
-          </AssociationSet>
-          </EntityContainer>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="ProjInformaticaModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="ProjInformaticaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserLogins">
           <Key>
@@ -436,16 +380,16 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="ProjInformaticaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -456,11 +400,19 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="ProjInformaticaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="ProjInformaticaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Encomenda" Relationship="ProjInformaticaModel.FK_Encomenda_AspNetUsers" FromRole="AspNetUsers" ToRole="Encomenda" />
-          <NavigationProperty Name="AspNetRoles" Relationship="ProjInformaticaModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Encomenda" Relationship="Self.FK_Encomenda_AspNetUsers" FromRole="AspNetUsers" ToRole="Encomenda" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Classe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK_Produto_Classe1" FromRole="Classe" ToRole="Produto" />
         </EntityType>
         <EntityType Name="Encomenda">
           <Key>
@@ -471,23 +423,39 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
           <Property Name="DataProcessamento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataLevantamento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Estado" Type="Int32" Nullable="false" />
-          <Property Name="ClienteID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="ProjInformaticaModel.FK_Encomenda_AspNetUsers" FromRole="Encomenda" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Encomenda_Produto_Ingrediente" Relationship="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Encomenda" FromRole="Encomenda" ToRole="Encomenda_Produto_Ingrediente" />
+          <Property Name="ClienteID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Encomenda_AspNetUsers" FromRole="Encomenda" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Encomenda_Produto_Ingrediente" Relationship="Self.FK_Encomenda_Produto_Ingrediente_Encomenda" FromRole="Encomenda" ToRole="Encomenda_Produto_Ingrediente" />
         </EntityType>
         <EntityType Name="Ingrediente">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="PrecoBase" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Nome" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrecoBase" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Imagem" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
           <Property Name="Disponivel" Type="Boolean" Nullable="false" />
           <Property Name="Quente" Type="Boolean" Nullable="false" />
           <Property Name="Frio" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Encomenda_Produto_Ingrediente" Relationship="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Ingrediente" FromRole="Ingrediente" ToRole="Encomenda_Produto_Ingrediente" />
-          <NavigationProperty Name="ProdutoIngrediente" Relationship="ProjInformaticaModel.FK_ProdutoIngrediente_Ingrediente" FromRole="Ingrediente" ToRole="ProdutoIngrediente" />
+          <NavigationProperty Name="Encomenda_Produto_Ingrediente" Relationship="Self.FK_Encomenda_Produto_Ingrediente_Ingrediente" FromRole="Ingrediente" ToRole="Encomenda_Produto_Ingrediente" />
+          <NavigationProperty Name="ProdutoIngrediente" Relationship="Self.FK_ProdutoIngrediente_Ingrediente" FromRole="Ingrediente" ToRole="ProdutoIngrediente" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrecoBase" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Imagem" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="ClasseID" Type="Int32" Nullable="false" />
+          <Property Name="ProdutoPaiID" Type="Int32" />
+          <NavigationProperty Name="Classe" Relationship="Self.FK_Produto_Classe1" FromRole="Produto" ToRole="Classe" />
+          <NavigationProperty Name="Encomenda_Produto_Ingrediente" Relationship="Self.FK_Encomenda_Produto_Ingrediente_Produto" FromRole="Produto" ToRole="Encomenda_Produto_Ingrediente" />
+          <NavigationProperty Name="ProdutoIngrediente" Relationship="Self.FK_ProdutoIngrediente_Produto" FromRole="Produto" ToRole="ProdutoIngrediente" />
+          <NavigationProperty Name="Produto1" Relationship="ProjInformaticaModel.FK_Produto_Produto" FromRole="Produto" ToRole="Produto1" />
+          <NavigationProperty Name="Produto2" Relationship="ProjInformaticaModel.FK_Produto_Produto" FromRole="Produto1" ToRole="Produto" />
         </EntityType>
         <EntityType Name="Encomenda_Produto_Ingrediente">
           <Key>
@@ -501,10 +469,10 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
           <Property Name="ProdutoID" Type="Int32" Nullable="false" />
           <Property Name="IngredienteID" Type="Int32" Nullable="false" />
           <Property Name="Quantidade" Type="Int32" Nullable="false" />
-          <Property Name="PrecoBase" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Encomenda" Relationship="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Encomenda" FromRole="Encomenda_Produto_Ingrediente" ToRole="Encomenda" />
-          <NavigationProperty Name="Ingrediente" Relationship="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Ingrediente" FromRole="Encomenda_Produto_Ingrediente" ToRole="Ingrediente" />
-          <NavigationProperty Name="Produto" Relationship="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Produto" FromRole="Encomenda_Produto_Ingrediente" ToRole="Produto" />
+          <Property Name="PrecoBase" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Encomenda" Relationship="Self.FK_Encomenda_Produto_Ingrediente_Encomenda" FromRole="Encomenda_Produto_Ingrediente" ToRole="Encomenda" />
+          <NavigationProperty Name="Ingrediente" Relationship="Self.FK_Encomenda_Produto_Ingrediente_Ingrediente" FromRole="Encomenda_Produto_Ingrediente" ToRole="Ingrediente" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK_Encomenda_Produto_Ingrediente_Produto" FromRole="Encomenda_Produto_Ingrediente" ToRole="Produto" />
         </EntityType>
         <EntityType Name="ProdutoIngrediente">
           <Key>
@@ -515,14 +483,14 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
           <Property Name="ProdutoID" Type="Int32" Nullable="false" />
           <Property Name="IngredienteID" Type="Int32" Nullable="false" />
           <Property Name="Quantidade" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Ingrediente" Relationship="ProjInformaticaModel.FK_ProdutoIngrediente_Ingrediente" FromRole="ProdutoIngrediente" ToRole="Ingrediente" />
-          <NavigationProperty Name="Produto" Relationship="ProjInformaticaModel.FK_ProdutoIngrediente_Produto" FromRole="ProdutoIngrediente" ToRole="Produto" />
+          <NavigationProperty Name="Ingrediente" Relationship="Self.FK_ProdutoIngrediente_Ingrediente" FromRole="ProdutoIngrediente" ToRole="Ingrediente" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK_ProdutoIngrediente_Produto" FromRole="ProdutoIngrediente" ToRole="Produto" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="ProjInformaticaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="ProjInformaticaModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -533,10 +501,10 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="ProjInformaticaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="ProjInformaticaModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -547,8 +515,8 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Encomenda_AspNetUsers">
-          <End Type="ProjInformaticaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
-          <End Type="ProjInformaticaModel.Encomenda" Role="Encomenda" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Encomenda" Type="Self.Encomenda" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -558,9 +526,21 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Produto_Classe1">
+          <End Role="Classe" Type="Self.Classe" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="ClasseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Encomenda_Produto_Ingrediente_Encomenda">
-          <End Type="ProjInformaticaModel.Encomenda" Role="Encomenda" Multiplicity="1" />
-          <End Type="ProjInformaticaModel.Encomenda_Produto_Ingrediente" Role="Encomenda_Produto_Ingrediente" Multiplicity="*" />
+          <End Role="Encomenda" Type="Self.Encomenda" Multiplicity="1" />
+          <End Role="Encomenda_Produto_Ingrediente" Type="Self.Encomenda_Produto_Ingrediente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Encomenda">
               <PropertyRef Name="ID" />
@@ -571,8 +551,8 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Encomenda_Produto_Ingrediente_Ingrediente">
-          <End Type="ProjInformaticaModel.Ingrediente" Role="Ingrediente" Multiplicity="1" />
-          <End Type="ProjInformaticaModel.Encomenda_Produto_Ingrediente" Role="Encomenda_Produto_Ingrediente" Multiplicity="*" />
+          <End Role="Ingrediente" Type="Self.Ingrediente" Multiplicity="1" />
+          <End Role="Encomenda_Produto_Ingrediente" Type="Self.Encomenda_Produto_Ingrediente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ingrediente">
               <PropertyRef Name="ID" />
@@ -583,8 +563,8 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProdutoIngrediente_Ingrediente">
-          <End Type="ProjInformaticaModel.Ingrediente" Role="Ingrediente" Multiplicity="1" />
-          <End Type="ProjInformaticaModel.ProdutoIngrediente" Role="ProdutoIngrediente" Multiplicity="*" />
+          <End Role="Ingrediente" Type="Self.Ingrediente" Multiplicity="1" />
+          <End Role="ProdutoIngrediente" Type="Self.ProdutoIngrediente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ingrediente">
               <PropertyRef Name="ID" />
@@ -594,49 +574,9 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="ProjInformaticaModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="ProjInformaticaModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Classe">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="124" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Produto" Relationship="ProjInformaticaModel.FK_Produto_Classe" FromRole="Classe" ToRole="Produto" />
-        </EntityType>
-        <EntityType Name="Produto">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="PrecoBase" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Imagem" Type="String" MaxLength="1024" FixedLength="true" Unicode="true" />
-          <Property Name="ClasseID" Type="Int32" />
-          <Property Name="ProdutoPaiID" Type="Int32" />
-          <NavigationProperty Name="Classe" Relationship="ProjInformaticaModel.FK_Produto_Classe" FromRole="Produto" ToRole="Classe" />
-          <NavigationProperty Name="Encomenda_Produto_Ingrediente" Relationship="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Produto" FromRole="Produto" ToRole="Encomenda_Produto_Ingrediente" />
-          <NavigationProperty Name="Produto1" Relationship="ProjInformaticaModel.FK_Produto_Produto" FromRole="Produto" ToRole="Produto1" />
-          <NavigationProperty Name="Produto2" Relationship="ProjInformaticaModel.FK_Produto_Produto" FromRole="Produto1" ToRole="Produto" />
-          <NavigationProperty Name="ProdutoIngrediente" Relationship="ProjInformaticaModel.FK_ProdutoIngrediente_Produto" FromRole="Produto" ToRole="ProdutoIngrediente" />
-        </EntityType>
-        <Association Name="FK_Produto_Classe">
-          <End Type="ProjInformaticaModel.Classe" Role="Classe" Multiplicity="0..1" />
-          <End Type="ProjInformaticaModel.Produto" Role="Produto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Classe">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Produto">
-              <PropertyRef Name="ClasseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Encomenda_Produto_Ingrediente_Produto">
-          <End Type="ProjInformaticaModel.Produto" Role="Produto" Multiplicity="1" />
-          <End Type="ProjInformaticaModel.Encomenda_Produto_Ingrediente" Role="Encomenda_Produto_Ingrediente" Multiplicity="*" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Encomenda_Produto_Ingrediente" Type="Self.Encomenda_Produto_Ingrediente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Produto">
               <PropertyRef Name="ID" />
@@ -646,6 +586,78 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProdutoIngrediente_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="ProdutoIngrediente" Type="Self.ProdutoIngrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProdutoIngrediente">
+              <PropertyRef Name="ProdutoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ProjInformaticaEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Classe" EntityType="Self.Classe" />
+          <EntitySet Name="Encomenda" EntityType="Self.Encomenda" />
+          <EntitySet Name="Ingrediente" EntityType="Self.Ingrediente" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" />
+          <EntitySet Name="Encomenda_Produto_Ingrediente" EntityType="Self.Encomenda_Produto_Ingrediente" />
+          <EntitySet Name="ProdutoIngrediente" EntityType="Self.ProdutoIngrediente" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_AspNetUsers" Association="Self.FK_Encomenda_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Encomenda" EntitySet="Encomenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produto_Classe1" Association="Self.FK_Produto_Classe1">
+            <End Role="Classe" EntitySet="Classe" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Encomenda" Association="Self.FK_Encomenda_Produto_Ingrediente_Encomenda">
+            <End Role="Encomenda" EntitySet="Encomenda" />
+            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Ingrediente" Association="Self.FK_Encomenda_Produto_Ingrediente_Ingrediente">
+            <End Role="Ingrediente" EntitySet="Ingrediente" />
+            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProdutoIngrediente_Ingrediente" Association="Self.FK_ProdutoIngrediente_Ingrediente">
+            <End Role="Ingrediente" EntitySet="Ingrediente" />
+            <End Role="ProdutoIngrediente" EntitySet="ProdutoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Produto" Association="Self.FK_Encomenda_Produto_Ingrediente_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProdutoIngrediente_Produto" Association="Self.FK_ProdutoIngrediente_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="ProdutoIngrediente" EntitySet="ProdutoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produto_Produto" Association="ProjInformaticaModel.FK_Produto_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Produto1" EntitySet="Produto" />
+          </AssociationSet>
+        </EntityContainer>
         <Association Name="FK_Produto_Produto">
           <End Type="ProjInformaticaModel.Produto" Role="Produto" Multiplicity="0..1" />
           <End Type="ProjInformaticaModel.Produto" Role="Produto1" Multiplicity="*" />
@@ -658,143 +670,131 @@ warning 6002: The table/view 'ProjInformatica.dbo.ProdutoIngrediente' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProdutoIngrediente_Produto">
-          <End Type="ProjInformaticaModel.Produto" Role="Produto" Multiplicity="1" />
-          <End Type="ProjInformaticaModel.ProdutoIngrediente" Role="ProdutoIngrediente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Produto">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ProdutoIngrediente">
-              <PropertyRef Name="ProdutoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProjInformaticaModelStoreContainer" CdmEntityContainer="ProjInformaticaEntities1">
+        <EntityContainerMapping StorageEntityContainer="ProjInformaticaModelStoreContainer" CdmEntityContainer="ProjInformaticaEntity">
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="ProjInformaticaModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="ProjInformaticaModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
             <EntityTypeMapping TypeName="ProjInformaticaModel.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="ProjInformaticaModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classe">
+            <EntityTypeMapping TypeName="ProjInformaticaModel.Classe">
+              <MappingFragment StoreEntitySet="Classe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Encomenda">
             <EntityTypeMapping TypeName="ProjInformaticaModel.Encomenda">
               <MappingFragment StoreEntitySet="Encomenda">
-                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="DataLevantamento" ColumnName="DataLevantamento" />
-                <ScalarProperty Name="DataProcessamento" ColumnName="DataProcessamento" />
-                <ScalarProperty Name="DataEncomenda" ColumnName="DataEncomenda" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DataEncomenda" ColumnName="DataEncomenda" />
+                <ScalarProperty Name="DataProcessamento" ColumnName="DataProcessamento" />
+                <ScalarProperty Name="DataLevantamento" ColumnName="DataLevantamento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ingrediente">
             <EntityTypeMapping TypeName="ProjInformaticaModel.Ingrediente">
               <MappingFragment StoreEntitySet="Ingrediente">
-                <ScalarProperty Name="Frio" ColumnName="Frio" />
-                <ScalarProperty Name="Quente" ColumnName="Quente" />
-                <ScalarProperty Name="Disponivel" ColumnName="Disponivel" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
                 <ScalarProperty Name="Imagem" ColumnName="Imagem" />
-                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Encomenda_Produto_Ingrediente">
-            <EntityTypeMapping TypeName="ProjInformaticaModel.Encomenda_Produto_Ingrediente">
-              <MappingFragment StoreEntitySet="Encomenda_Produto_Ingrediente">
-                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
-                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
-                <ScalarProperty Name="IngredienteID" ColumnName="IngredienteID" />
-                <ScalarProperty Name="ProdutoID" ColumnName="ProdutoID" />
-                <ScalarProperty Name="EncomendaID" ColumnName="EncomendaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProdutoIngrediente">
-            <EntityTypeMapping TypeName="ProjInformaticaModel.ProdutoIngrediente">
-              <MappingFragment StoreEntitySet="ProdutoIngrediente">
-                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
-                <ScalarProperty Name="IngredienteID" ColumnName="IngredienteID" />
-                <ScalarProperty Name="ProdutoID" ColumnName="ProdutoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ProjInformaticaModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="Classe">
-            <EntityTypeMapping TypeName="ProjInformaticaModel.Classe">
-              <MappingFragment StoreEntitySet="Classe">
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Disponivel" ColumnName="Disponivel" />
+                <ScalarProperty Name="Quente" ColumnName="Quente" />
+                <ScalarProperty Name="Frio" ColumnName="Frio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Produto">
             <EntityTypeMapping TypeName="ProjInformaticaModel.Produto">
               <MappingFragment StoreEntitySet="Produto">
-                <ScalarProperty Name="ProdutoPaiID" ColumnName="ProdutoPaiID" />
-                <ScalarProperty Name="ClasseID" ColumnName="ClasseID" />
-                <ScalarProperty Name="Imagem" ColumnName="Imagem" />
-                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
+                <ScalarProperty Name="Imagem" ColumnName="Imagem" />
+                <ScalarProperty Name="ClasseID" ColumnName="ClasseID" />
+                <ScalarProperty Name="ProdutoPaiID" ColumnName="ProdutoPaiID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+          <EntitySetMapping Name="Encomenda_Produto_Ingrediente">
+            <EntityTypeMapping TypeName="ProjInformaticaModel.Encomenda_Produto_Ingrediente">
+              <MappingFragment StoreEntitySet="Encomenda_Produto_Ingrediente">
+                <ScalarProperty Name="EncomendaID" ColumnName="EncomendaID" />
+                <ScalarProperty Name="ProdutoID" ColumnName="ProdutoID" />
+                <ScalarProperty Name="IngredienteID" ColumnName="IngredienteID" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProdutoIngrediente">
+            <EntityTypeMapping TypeName="ProjInformaticaModel.ProdutoIngrediente">
+              <MappingFragment StoreEntitySet="ProdutoIngrediente">
+                <ScalarProperty Name="ProdutoID" ColumnName="ProdutoID" />
+                <ScalarProperty Name="IngredienteID" ColumnName="IngredienteID" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ProjInformaticaModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

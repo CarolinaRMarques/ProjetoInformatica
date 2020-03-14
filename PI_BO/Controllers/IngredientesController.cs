@@ -10,21 +10,23 @@ using System.Web.Mvc;
 using PagedList;
 using PI_BO.Models;
 
+
 namespace PI_BO.Controllers
 {
     [Authorize]
     public class IngredientesController : Controller
     {
-        private ProjInformaticaEntities1 db = new ProjInformaticaEntities1();
+        private ProjInformaticaEntity db = new ProjInformaticaEntity();
 
         // GET: Ingredientes
         public ActionResult Index(int? page)
         {
             int _page = page ?? 1;
             int pagesize = Int16.Parse(ConfigurationManager.AppSettings["pagesize"]);
-            var retval = db.Ingrediente.OrderBy(x => x.Nome).ToPagedList(_page,pagesize);
+            var retval = db.Ingrediente.OrderBy(x => x.Nome).ToPagedList(_page, pagesize);
             return View(retval);
         }
+
 
         // GET: Ingredientes/Details/5
         public ActionResult Details(int? id)

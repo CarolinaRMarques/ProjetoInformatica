@@ -13,11 +13,11 @@ using PI_BO.Models;
 namespace PI_BO.Controllers
 {
     [Authorize]
-    public class ProdutoController : Controller
+    public class ProdutosController : Controller
     {
-        private ProjInformaticaEntities1 db = new ProjInformaticaEntities1();
+        private ProjInformaticaEntity db = new ProjInformaticaEntity();
 
-        // GET: Produto
+        // GET: Produtos
         public ActionResult Index(int? page)
         {
             int _page = page ?? 1;
@@ -26,7 +26,7 @@ namespace PI_BO.Controllers
             return View(retval);
         }
 
-        // GET: Produto/Details/5
+        // GET: Produtos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,7 +41,7 @@ namespace PI_BO.Controllers
             return View(produto);
         }
 
-        // GET: Produto/Create
+        // GET: Produtos/Create
         public ActionResult Create()
         {
             ViewBag.ClasseID = new SelectList(db.Classe, "ID", "Nome");
@@ -49,7 +49,7 @@ namespace PI_BO.Controllers
             return View();
         }
 
-        // POST: Produto/Create
+        // POST: Produtos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -68,7 +68,7 @@ namespace PI_BO.Controllers
             return View(produto);
         }
 
-        // GET: Produto/Edit/5
+        // GET: Produtos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,7 +85,7 @@ namespace PI_BO.Controllers
             return View(produto);
         }
 
-        // POST: Produto/Edit/5
+        // POST: Produtos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -103,7 +103,7 @@ namespace PI_BO.Controllers
             return View(produto);
         }
 
-        // GET: Produto/Delete/5
+        // GET: Produtos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,7 +118,7 @@ namespace PI_BO.Controllers
             return View(produto);
         }
 
-        // POST: Produto/Delete/5
+        // POST: Produtos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -18,7 +18,7 @@ namespace PI_BO.Models
         public int ProdutoID { get; set; }
         public int IngredienteID { get; set; }
         public int Quantidade { get; set; }
-        public int PrecoBase { get; set; }
+        public decimal PrecoBase { get; set; }
     
         public virtual Encomenda Encomenda { get; set; }
         public virtual Ingrediente Ingrediente { get; set; }

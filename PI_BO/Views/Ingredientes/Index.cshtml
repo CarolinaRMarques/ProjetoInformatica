@@ -23,11 +23,12 @@
             Ingredientes: @Html.Raw(String.Format("{0}-{1} de {2}", (Model.PageNumber - 1) * Model.PageSize + 1, (Model.TotalItemCount > Model.PageNumber * Model.PageSize ? Model.PageNumber * Model.PageSize : Model.TotalItemCount), Model.TotalItemCount))
         </div>
         <div class="col-md-8 text-right">
-            @if (Model.PageCount > 1) {
-            @Html.PagedListPager(Model, page => Url.Action("Index",
-                 new { tipo = ViewBag.Tipo, ano = ViewBag.Ano, centro = ViewBag.Centro, livro = ViewBag.Livro, page }),
-                 new PagedListRenderOptions { LinkToFirstPageFormat = "&#8676;", LinkToPreviousPageFormat = "&#8592;", LinkToNextPageFormat = "&#8594;", LinkToLastPageFormat = "&#8677;" })
-        }
+            @if (Model.PageCount > 1)
+            {
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                     new { tipo = ViewBag.Tipo, ano = ViewBag.Ano, centro = ViewBag.Centro, livro = ViewBag.Livro, page }),
+                     new PagedListRenderOptions { LinkToFirstPageFormat = "&#8676;", LinkToPreviousPageFormat = "&#8592;", LinkToNextPageFormat = "&#8594;", LinkToLastPageFormat = "&#8677;" })
+            }
         </div>
     </div>
     <table class="table table-striped">

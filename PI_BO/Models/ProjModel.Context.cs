@@ -13,10 +13,10 @@ namespace PI_BO.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProjInformaticaEntities1 : DbContext
+    public partial class ProjInformaticaEntity : DbContext
     {
-        public ProjInformaticaEntities1()
-            : base("name=ProjInformaticaEntities1")
+        public ProjInformaticaEntity()
+            : base("name=ProjInformaticaEntity")
         {
         }
     

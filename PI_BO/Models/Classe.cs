@@ -14,9 +14,16 @@ namespace PI_BO.Models
     
     public partial class Classe
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Classe()
+        {
+            this.Produto = new HashSet<Produto>();
+        }
+    
         public int ID { get; set; }
         public string Nome { get; set; }
     
-        public virtual Produto Produto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Produto> Produto { get; set; }
     }
 }

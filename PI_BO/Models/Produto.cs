@@ -18,24 +18,24 @@ namespace PI_BO.Models
         public Produto()
         {
             this.Encomenda_Produto_Ingrediente = new HashSet<Encomenda_Produto_Ingrediente>();
-            this.Produto1 = new HashSet<Produto>();
             this.ProdutoIngrediente = new HashSet<ProdutoIngrediente>();
+            this.Produto1 = new HashSet<Produto>();
         }
     
         public int ID { get; set; }
         public string Nome { get; set; }
         public decimal PrecoBase { get; set; }
         public string Imagem { get; set; }
-        public Nullable<int> ClasseID { get; set; }
+        public int ClasseID { get; set; }
         public Nullable<int> ProdutoPaiID { get; set; }
     
         public virtual Classe Classe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Encomenda_Produto_Ingrediente> Encomenda_Produto_Ingrediente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProdutoIngrediente> ProdutoIngrediente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Produto> Produto1 { get; set; }
         public virtual Produto Produto2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProdutoIngrediente> ProdutoIngrediente { get; set; }
     }
 }

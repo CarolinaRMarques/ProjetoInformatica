@@ -15,7 +15,7 @@ namespace PI_BO.Controllers
     [Authorize]
     public class ClasseController : Controller
     {
-        private ProjInformaticaEntities1 db = new ProjInformaticaEntities1();
+        private ProjInformaticaEntity db = new ProjInformaticaEntity();
 
         // GET: Classe
         public ActionResult Index(int? page)
