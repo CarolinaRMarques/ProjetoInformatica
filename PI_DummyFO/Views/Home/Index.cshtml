@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "Landing Page";
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#getTokenModal">Token</button>
+<button id="getIngredients" class="btn btn-default">Ingredients</button>
+<div id="token"></div>
+<div id="ingredients"></div>
+<hr />
+<p><i class="fa fa-clock-o"></i> <span id="rData"></span></p>
+<!-- Modal Get Token -->
+<div class="modal fade" id="getTokenModal" tabindex="-1" role="dialog" aria-labelledby="getTokenModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Token Login Form</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="col-md-2 control-label" for="Email">Email</label>
+                    <div class="col-md-10">
+                        <input class="form-control" data-val="true" data-val-email="O campo Email não é um endereço de correio eletrónico válido." data-val-required="O campo Email é necessário." id="Email" name="Email" type="text" value="carolinaresendemarques@ua.pt" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2 control-label" for="Password">Password</label>
+                    <div class="col-md-10">
+                        <input class="form-control" data-val="true" data-val-required="O campo Password é necessário." id="Password" name="Password" type="password" value="Treta.01" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="getToken">Get Token</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        // #region Setup & Globals
+        var accessToken;
+        var apiUrl = "https://localhost:44310";
+       // var localUrl = "/Home/DataHoraAtual";
+        $.ajaxSetup({
+            error: function (xhr, status, error) {
+                alert("An AJAX error occured: " + status + "\nError: " + error + "\nError detail: " + xhr.responseText);
+            }
+        });
+        ////--- Test localAjax
+        //$.get(localUrl, null, function (data) {
+        //    $("#rData").html(data);
+        //});
+        // #endregion
+        // #region --- Funções auxiliares
+        function ajaxHelper(uri, method, data) {
+            return $.ajax({
+                'type': method,
+                'url': uri,
+                'dataType': 'json',
+                'content-Type': 'application/x-www-form-urlencodedd',
+                data: data ? data : null,
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX Call[" + uri + "] Fail...");
+                },
+                statusCode: {
+                    401: function () {
+                        alert("Session timeout");
+                    }
+                },
+                timeout: 10000
+            });
+        }
+
+        function ajaxHelperWithToken(uri, method, data, token) {
+            return $.ajax({
+                'type': method,
+                'url': uri,
+                'dataType': 'json',
+                'content-Type': 'application/x-www-form-urlencodedd',
+                'headers': {
+                    // Use access_token previously retrieved
+                    'Authorization': 'Bearer ' + token
+                },
+                data: data ? data : null,
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX Call[" + uri + "] Fail...");
+                },
+                statusCode: {
+                    401: function () {
+                        alert("Session timeout");
+                    }
+                },
+                timeout: 10000
+            });
+        }
+        // #endregion
+
+        $("#getToken").click(function () {
+            console.log("Handler for getToken.click().");
+            $('#getTokenModal').modal('toggle');
+            var url = apiUrl + "/Token";
+            var credentials = {
+                'grant_type': 'password',
+                'username': $("#Email").val(),
+                'password': $("#Password").val()
+            };
+            ajaxHelper(url, 'POST', credentials)
+                .done(function (data) {
+                    $("#token").html(JSON.stringify(data));
+                    accessToken = data.access_token;
+                });
+        });
+        $("#getIngredients").click(function () {
+            var ingredientsUrl = apiUrl + "/api/Ingredientes"
+            ajaxHelperWithToken(ingredientsUrl, 'GET', null, accessToken)
+                .done(function (data) {
+                    console.log(JSON.stringify(data).length);
+                    $("#ingredients").html(JSON.stringify(data));
+                })
+            //.always(function () {
+            //    alert("finished");
+            //});
+        });
+
+    </script>
+}

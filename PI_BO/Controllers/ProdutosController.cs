@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using PI_API.Models;
 using PI_BO.Models;
 
 namespace PI_BO.Controllers
@@ -15,7 +16,7 @@ namespace PI_BO.Controllers
     [Authorize]
     public class ProdutosController : Controller
     {
-        private ProjInformaticaEntity db = new ProjInformaticaEntity();
+        private ProjInformaticaEntities db = new ProjInformaticaEntities();
 
         // GET: Produtos
         public ActionResult Index(int? page)

@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<PI_BackOffice.Models.Ingrediente>
+
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Ingredientes - Lista";
+}
+
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+<div class="row">
+
+    <div class="col-md-1 pagination-label-container">
+        <a href="@Url.Action("Create")" class=" btn btn-default" title="Criar novo Ingrediente"><i class="fa fa-plus"></i></a>
+    </div>
+</div>
+@if (Model.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-3 pagination-label-container">
+            @Html.Raw(String.Format("Página: {0} de {1}", (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber), Model.PageCount))<br />
+            Ingredientes: @Html.Raw(String.Format("{0}-{1} de {2}", (Model.PageNumber - 1) * Model.PageSize + 1, (Model.TotalItemCount > Model.PageNumber * Model.PageSize ? Model.PageNumber * Model.PageSize : Model.TotalItemCount), Model.TotalItemCount))
+        </div>
+        <div class="col-md-8 text-right">
+            @if (Model.PageCount > 1)
+            {
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                     new { tipo = ViewBag.Tipo, ano = ViewBag.Ano, centro = ViewBag.Centro, livro = ViewBag.Livro, page }),
+                     new PagedListRenderOptions { LinkToFirstPageFormat = "&#8676;", LinkToPreviousPageFormat = "&#8592;", LinkToNextPageFormat = "&#8594;", LinkToLastPageFormat = "&#8677;" })
+            }
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="col-sm-6">@Html.DisplayNameFor(model => model.FirstOrDefault().Nome)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.FirstOrDefault().PrecoBase)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.FirstOrDefault().Disponivel)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.FirstOrDefault().Quente)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.FirstOrDefault().Frio)</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.PrecoBase)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.Disponivel)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.Quente)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.Frio)</td>
+                <td class="text-right">
+                    <a href=" @Url.Action("Edit", new { id = item.ID }) " class="btn btn-default btn-sm" title="Editar Ingrediente"><i class="fa fa-edit "></i></a>
+                    <a href=" @Url.Action("Details", new { id = item.ID })" class="btn btn-default btn-sm" title="Ver Ingrediente"><i class="fa fa-eye"></i></a>
+                    <a href=" @Url.Action("Delete", new { id = item.ID })" class="btn btn-default btn-sm" title="Apagar Ingrediente"><i class="fa fa-trash-o"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <div class="bs-callout bs-callout-info">
+        <h4><i class="fa fa-info-circle"></i> Informação</h4>
+        <p>Não existem, neste momento, elementos para representar.</p>
+    </div>
+}
