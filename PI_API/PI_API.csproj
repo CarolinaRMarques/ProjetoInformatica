@@ -222,8 +222,11 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiExplrerSettingsAttribute.cs" />
+    <Compile Include="Controllers\EncomendasController.cs" />
+    <Compile Include="Controllers\Encomenda_Menu_ProdutoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientesController.cs" />
+    <Compile Include="Controllers\MenusController.cs" />
     <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="Filters\GzipCompression.cs" />
     <Compile Include="Global.asax.cs">
@@ -246,9 +249,15 @@
     <Compile Include="Models\Classe.cs">
       <DependentUpon>ProjInformatica.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO_Encomenda.cs" />
+    <Compile Include="Models\DTO_Encomenda_Menu_Produto.cs" />
     <Compile Include="Models\DTO_Ingrediente.cs" />
+    <Compile Include="Models\DTO_Menu.cs" />
     <Compile Include="Models\DTO_Produto.cs" />
     <Compile Include="Models\Encomenda.cs">
+      <DependentUpon>ProjInformatica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Encomenda_Menu_Produto.cs">
       <DependentUpon>ProjInformatica.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Encomenda_Produto_Ingrediente.cs">
@@ -258,10 +267,16 @@
     <Compile Include="Models\Ingrediente.cs">
       <DependentUpon>ProjInformatica.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Menu.cs">
+      <DependentUpon>ProjInformatica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Menu_Produto.cs">
+      <DependentUpon>ProjInformatica.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Produto.cs">
       <DependentUpon>ProjInformatica.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProdutoIngrediente.cs">
+    <Compile Include="Models\Produto_Ingrediente.cs">
       <DependentUpon>ProjInformatica.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProjInformatica.Context.cs">
@@ -278,6 +293,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProjInformatica.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>ProjInformatica.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -298,13 +316,13 @@
     <Content Include="Global.asax" />
     <Content Include="Models\ProjInformatica.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProjInformatica.edmx</DependentUpon>
       <LastGenOutput>ProjInformatica.Context.cs</LastGenOutput>
+      <DependentUpon>ProjInformatica.edmx</DependentUpon>
     </Content>
     <Content Include="Models\ProjInformatica.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProjInformatica.edmx</DependentUpon>
       <LastGenOutput>ProjInformatica.cs</LastGenOutput>
+      <DependentUpon>ProjInformatica.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

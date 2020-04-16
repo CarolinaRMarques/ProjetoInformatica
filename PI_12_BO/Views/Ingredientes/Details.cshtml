@@ -1,0 +1,27 @@
+﻿@model PI_12_BO.Models.Ingrediente
+
+@{
+    ViewBag.Title = "Ingrediente - Detalhes";
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+<dl class="dl-horizontal">
+    <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+    <dd>@Html.DisplayFor(model => model.Nome)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.PrecoBase)</dt>
+    <dd>@Html.DisplayFor(model => model.PrecoBase) €</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.Imagem)</dt>
+    <dd><img src="@Model.Imagem" width="240" /></dd>
+
+    <dt>@Html.DisplayNameFor(model => model.Disponivel)</dt>
+    <dd>@Html.DisplayFor(model => model.Disponivel)</dd>
+
+</dl>
+<p class="col-md-offset-2">
+    <a href="@Url.Action("Edit",new { id = Model.ID })" class="btn btn-default"><i class="fa fa-edit"></i></a>
+    <a href="@Url.Action("Index")" class="btn btn-default" title="Voltar à Lista"><i class=" fa fa-list"></i></a>
+</p>

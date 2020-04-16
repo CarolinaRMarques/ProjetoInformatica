@@ -5,27 +5,37 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e29cf1ccd43846c1a30cad89f4e2231d" Name="Diagram1">
-        <EntityTypeShape EntityType="ProjInformaticaModel.AspNetRoles" Width="1.5" PointX="3.125" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjInformaticaModel.AspNetUserClaims" Width="1.5" PointX="4.875" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjInformaticaModel.AspNetUserLogins" Width="1.5" PointX="0.625" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjInformaticaModel.AspNetUsers" Width="1.5" PointX="10.125" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjInformaticaModel.Classe" Width="1.5" PointX="0.5" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjInformaticaModel.Encomenda" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjInformaticaModel.Ingrediente" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjInformaticaModel.Produto" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjInformaticaModel.Encomenda_Produto_Ingrediente" Width="1.5" PointX="8" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjInformaticaModel.ProdutoIngrediente" Width="1.5" PointX="0.5" PointY="2.875" IsExpanded="true" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_Produto_Classe1" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Encomenda" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Ingrediente" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_ProdutoIngrediente_Ingrediente" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Produto" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_Produto_Produto" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.FK_ProdutoIngrediente_Produto" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjInformaticaModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.AspNetRoles" Width="1.5" PointX="1.5" PointY="19.75" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="22.25" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="25" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="14.125" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.Classe" Width="1.5" PointX="0.75" PointY="6.375" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.Encomenda" Width="1.5" PointX="3" PointY="15.125" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.Encomenda_Menu_Produto" Width="1.5" PointX="8.25" PointY="5.875" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.Encomenda_Produto_Ingrediente" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.Ingrediente" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.Menu" Width="1.5" PointX="6" PointY="12.125" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.Menu_Produto" Width="1.5" PointX="5.25" PointY="9.125" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.Produto" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.Produto_Ingrediente" Width="1.5" PointX="5.25" PointY="6.125" />
+        <EntityTypeShape EntityType="ProjInformaticaModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_AspNetUsers" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Produto_Classe1" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_Menu_Produto_Encomenda" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Encomenda1" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_Menu_Produto_Menu" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_Menu_Produto_Produto" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Ingrediente" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Encomenda_Produto_Ingrediente_Produto" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Produto_Ingrediente_Ingrediente" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Menu_Produto_Menu" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Menu_Produto_Menu1" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Menu_Produto_Produto" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Produto_Ingrediente_Produto" />
+        <AssociationConnector Association="ProjInformaticaModel.FK_Produto_Produto1" />
+        <AssociationConnector Association="ProjInformaticaModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

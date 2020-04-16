@@ -17,25 +17,31 @@ namespace PI_API.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Produto()
         {
+            this.Encomenda_Menu_Produto = new HashSet<Encomenda_Menu_Produto>();
             this.Encomenda_Produto_Ingrediente = new HashSet<Encomenda_Produto_Ingrediente>();
+            this.Menu_Produto = new HashSet<Menu_Produto>();
+            this.Produto_Ingrediente = new HashSet<Produto_Ingrediente>();
             this.Produto1 = new HashSet<Produto>();
-            this.ProdutoIngrediente = new HashSet<ProdutoIngrediente>();
         }
     
         public int ID { get; set; }
         public string Nome { get; set; }
         public decimal PrecoBase { get; set; }
         public string Imagem { get; set; }
-        public int ClasseID { get; set; }
-        public Nullable<int> ProdutoPaiID { get; set; }
+        public int Classe_ID { get; set; }
+        public Nullable<int> SubProduto_ID { get; set; }
     
         public virtual Classe Classe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Encomenda_Menu_Produto> Encomenda_Menu_Produto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Encomenda_Produto_Ingrediente> Encomenda_Produto_Ingrediente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Menu_Produto> Menu_Produto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Produto_Ingrediente> Produto_Ingrediente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Produto> Produto1 { get; set; }
         public virtual Produto Produto2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProdutoIngrediente> ProdutoIngrediente { get; set; }
     }
 }

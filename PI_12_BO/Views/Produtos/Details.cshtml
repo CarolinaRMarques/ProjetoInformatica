@@ -1,0 +1,59 @@
+﻿@model PI_12_BO.Models.Produto
+
+@{
+    ViewBag.Title = "Produto - Detalhes";
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<dl class="dl-horizontal">
+    <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+    <dd>@Html.DisplayFor(model => model.Nome)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.PrecoBase)</dt>
+    <dd>@Html.DisplayFor(model => model.PrecoBase) €</dd>
+    @if (Model.Imagem != null)
+    {
+        <dt>@Html.DisplayNameFor(model => model.Imagem)</dt>
+        <dd>@Html.DisplayFor(model => model.Imagem)</dd>
+
+    }
+
+    <dt>@Html.DisplayNameFor(model => model.Classe_ID)</dt>
+    <dd>@Html.DisplayFor(model => model.Classe.Nome)</dd>
+
+    @if (Model.Produto2 != null)
+    {
+        <dt>@Html.DisplayNameFor(model => model.SubProduto_ID)</dt>
+        <dd>@Html.DisplayFor(model => model.Produto2.Nome)</dd>
+    }
+
+</dl>
+<div class="col-md-offset-2">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</div>
+
+<hr />
+<h3>Ingredientes - Lista</h3>
+<hr />
+@Html.Action("_IndexIngredientes", "Produtos_Ingredientes", new { Produto_ID = Model.ID })
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(".removeItem").on("click", function (e) {
+            var Produto_ID = $(this).data('produtoid');
+            var Produto_Nome = $(this).data('produtonome');
+            var IngredienteID = $(this).data('ingredienteid');
+            var IngredienteNome = $(this).data('ingredientenome');
+            var Quantidade = $(this).data('quantidade');
+            // Populate the Modal
+            $("#removeModal_Produto_Nome").html(Produto_Nome);
+            $("#removeModal_Ingrediente_Nome").html(IngredienteNome);
+            $("#removeModal_Quantidade").html(Quantidade);
+            // Populate the form
+            $("input[name='Produto_ID']").val(Produto_ID);
+            $("input[name='Ingrediente_ID']").val(IngredienteID);
+        });
+    </script>
+}

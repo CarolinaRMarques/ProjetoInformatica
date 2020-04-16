@@ -1,0 +1,43 @@
+﻿@model PI_12_BO.Models.Produto_Ingrediente
+
+@{
+    ViewBag.Title = "Remover Ingrediente de Produto";
+}
+
+<!-- Modal -->
+<div id="removeModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Remover Ingrediente de Produto [<span id="removeModal_Produto_Nome"></span>]</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div>
+                        <dl class="dl-horizontal">
+                            <dt class="form-control-static">@Html.DisplayNameFor(model => model.Ingrediente_ID)</dt>
+                            <dd class="form-control-static" id="removeModal_Ingrediente_Nome"></dd>
+                            <dt class="form-control-static">@Html.DisplayNameFor(model => model.Quantidade)</dt>
+                            <dd class="form-control-static" id="removeModal_Quantidade"></dd>
+                        </dl>
+                        <h3 class="text-danger">Tem a certeza que pretende remover o ingrediente do produto?</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("RemoveIngrediente", "Produtos_Ingredientes"))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-actions no-color text-right">
+                        <input type="hidden" name="Produto_ID" />
+                        <input type="hidden" name="Ingrediente_ID" />
+                        <input type="submit" value="Remover" class="btn btn-default" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,7 +18,7 @@ namespace PI_API.Models
         public Ingrediente()
         {
             this.Encomenda_Produto_Ingrediente = new HashSet<Encomenda_Produto_Ingrediente>();
-            this.ProdutoIngrediente = new HashSet<ProdutoIngrediente>();
+            this.Produto_Ingrediente = new HashSet<Produto_Ingrediente>();
         }
     
         public int ID { get; set; }
@@ -26,12 +26,12 @@ namespace PI_API.Models
         public decimal PrecoBase { get; set; }
         public string Imagem { get; set; }
         public bool Disponivel { get; set; }
-        public bool Quente { get; set; }
-        public bool Frio { get; set; }
+        public Nullable<bool> Quente { get; set; }
+        public Nullable<bool> Frio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Encomenda_Produto_Ingrediente> Encomenda_Produto_Ingrediente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProdutoIngrediente> ProdutoIngrediente { get; set; }
+        public virtual ICollection<Produto_Ingrediente> Produto_Ingrediente { get; set; }
     }
 }

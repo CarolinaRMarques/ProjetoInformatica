@@ -31,9 +31,13 @@ namespace PI_API.Models
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Classe> Classe { get; set; }
         public virtual DbSet<Encomenda> Encomenda { get; set; }
-        public virtual DbSet<Ingrediente> Ingrediente { get; set; }
-        public virtual DbSet<Produto> Produto { get; set; }
+        public virtual DbSet<Encomenda_Menu_Produto> Encomenda_Menu_Produto { get; set; }
         public virtual DbSet<Encomenda_Produto_Ingrediente> Encomenda_Produto_Ingrediente { get; set; }
-        public virtual DbSet<ProdutoIngrediente> ProdutoIngrediente { get; set; }
+        public virtual DbSet<Ingrediente> Ingrediente { get; set; }
+        public virtual DbSet<Menu> Menu { get; set; }
+        public virtual DbSet<Menu_Produto> Menu_Produto { get; set; }
+        public virtual DbSet<Produto> Produto { get; set; }
+        public virtual DbSet<Produto_Ingrediente> Produto_Ingrediente { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<PI_12_BO.Models.DTO_SearchResult>
+
+@{
+    ViewBag.Title = "Pesquisa - Resultados";
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+    Expressão de pesquisa: @ViewBag.SearchString
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.text)</th>
+            <th>@Html.DisplayNameFor(model => model.origem)</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.text)</td>
+            <td>@Html.DisplayFor(modelItem => item.origem)</td>
+            <td class="text-right">@Html.ActionLink("Link", "Details", @item.origem, new { id = item.id }, new { @class= "btn btn-default btn-xs btnLinkInnerText" })</td>
+        </tr>
+    }
+</table>

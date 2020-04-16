@@ -1,0 +1,42 @@
+﻿@model PI_12_BO.Models.Menu
+
+@{
+    ViewBag.Title = "Menú - Detalhes";
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div>
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Nome)</dd>
+    </dl>
+</div>
+<p class="col-md-offset-2">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</p>
+
+<hr />
+<h3>Produtos - Lista</h3>
+<hr />
+@Html.Action("_IndexProdutos", "Menu_Produto", new { Menu_ID = Model.ID })
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(".removeItem").on("click", function (e) {
+            var Menu_ID = $(this).data('menuid');
+            var Menu_Nome = $(this).data('menunome');
+            var ProdutoID = $(this).data('produtoid');
+            var ProdutoNome = $(this).data('produtonome');
+            var Quantidade = $(this).data('quantidade');
+            // Populate the Modal
+            $("#removeModal_Menu_Nome").html(Menu_Nome);
+            $("#removeModal_Produto_Nome").html(ProdutoNome);
+            $("#removeModal_Quantidade").html(Quantidade);
+            // Populate the form
+            $("input[name='Menu_ID']").val(Menu_ID);
+            $("input[name='Produto_ID']").val(ProdutoID);
+        });
+    </script>
+}

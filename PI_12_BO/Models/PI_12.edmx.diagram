@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5ed27ec678a94170b853fae59e7cdc0e" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="pi_12Model.AspNetRoles" Width="1.5" PointX="12.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="pi_12Model.AspNetUserClaims" Width="1.5" PointX="12.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="pi_12Model.AspNetUserLogins" Width="1.5" PointX="12.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="pi_12Model.AspNetUsers" Width="1.5" PointX="10.125" PointY="3.875" />
+        <AssociationConnector Association="pi_12Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="pi_12Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="pi_12Model.AspNetUserRoles" />
+        <EntityTypeShape EntityType="pi_12Model.Ingrediente" Width="1.5" PointX="7.875" PointY="8.75" />
+        <EntityTypeShape EntityType="pi_12Model.Produto" Width="1.5" PointX="5.25" PointY="4.25" />
+        <AssociationConnector Association="pi_12Model.FK_Produto_Produto" />
+        <EntityTypeShape EntityType="pi_12Model.Encomenda" Width="1.5" PointX="12.75" PointY="9.875" />
+        <AssociationConnector Association="pi_12Model.FK_Encomenda_AspNetUsers" />
+        <EntityTypeShape EntityType="pi_12Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="pi_12Model.Encomenda_Produto_Ingrediente" Width="1.5" PointX="18" PointY="7.125" />
+        <AssociationConnector Association="pi_12Model.FK_Encomenda_Produto_Ingrediente_Encomenda1" />
+        <AssociationConnector Association="pi_12Model.FK_Encomenda_Produto_Ingrediente_Ingrediente" />
+        <AssociationConnector Association="pi_12Model.FK_Encomenda_Produto_Ingrediente_Produto" />
+        <EntityTypeShape EntityType="pi_12Model.Classe" Width="1.5" PointX="3.375" PointY="5.25" />
+        <EntityTypeShape EntityType="pi_12Model.Encomenda_Menu_Produto" Width="1.5" PointX="15.375" PointY="7.125" />
+        <EntityTypeShape EntityType="pi_12Model.Menu" Width="1.5" PointX="0.75" PointY="10.875" />
+        <EntityTypeShape EntityType="pi_12Model.Menu_Produto" Width="1.5" PointX="7.875" PointY="5.5" />
+        <EntityTypeShape EntityType="pi_12Model.Produto_Ingrediente" Width="1.5" PointX="10.5" PointY="9.875" />
+        <AssociationConnector Association="pi_12Model.FK_Produto_Classe1" />
+        <AssociationConnector Association="pi_12Model.FK_Encomenda_Menu_Produto_Encomenda" />
+        <AssociationConnector Association="pi_12Model.FK_Encomenda_Menu_Produto_Menu" />
+        <AssociationConnector Association="pi_12Model.FK_Encomenda_Menu_Produto_Produto" />
+        <AssociationConnector Association="pi_12Model.FK_Produto_Ingrediente_Ingrediente" />
+        <AssociationConnector Association="pi_12Model.FK_Menu_Produto_Menu2" />
+        <AssociationConnector Association="pi_12Model.FK_Menu_Produto_Produto" />
+        <AssociationConnector Association="pi_12Model.FK_Produto_Ingrediente_Produto" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -12,13 +12,14 @@ namespace PI_API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProdutoIngrediente
+    public partial class Menu_Produto
     {
-        public int ProdutoID { get; set; }
-        public int IngredienteID { get; set; }
-        public int Quantidade { get; set; }
+        public int Menu_ID { get; set; }
+        public int Produto_ID { get; set; }
+        public string Quantidade { get; set; }
     
-        public virtual Ingrediente Ingrediente { get; set; }
+        public virtual Menu Menu { get; set; }
+        public virtual Menu Menu1 { get; set; }
         public virtual Produto Produto { get; set; }
     }
 }

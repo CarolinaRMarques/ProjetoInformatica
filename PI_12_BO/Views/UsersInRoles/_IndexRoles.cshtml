@@ -1,0 +1,28 @@
+﻿@model IEnumerable<PI_12_BO.Models.AspNetUsers>
+
+@{
+    ViewBag.Title = "Utilizadores no Papel";
+}
+<hr />
+<h3>@ViewBag.Title [@Model.Count()]</h3>
+<hr />
+<p>
+    <a class="btn btn-default" title="Adicionar Utilizador" data-toggle="modal" data-target="#myModal">Create New</a>
+</p>
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="form-control-static img-thumbnail">
+            <i class="fa fa-id-badge"></i> @item.FullName <a href="@Url.Action("RemoveUserFromRole", "UsersInRoles", new {  userId= item.Id, roleId = @ViewBag.roleId })" title="Remover o Papel ao Utilizador"><span aria-hidden="true">&times;</span></a>
+        </div>
+    }
+}
+else
+{
+    <div class="bs-callout bs-callout-info">
+        <h4 class="text-warning"><i class="fa fa-warning" aria-hidden="true"></i> Informação</h4>
+        <p>Papel sem Utilizadores associados.</p>
+    </div>
+}
+@Html.Action("_AddUserToRole", "UsersInRoles", new { roleId = @ViewBag.roleId })

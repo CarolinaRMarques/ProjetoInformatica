@@ -109,4 +109,5 @@ namespace PI_BackOffice.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
 }

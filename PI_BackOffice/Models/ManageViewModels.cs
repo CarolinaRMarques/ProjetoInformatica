@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -7,6 +8,15 @@ namespace PI_BackOffice.Models
 {
     public class IndexViewModel
     {
+         [Display(Name = "Nome Completo")]
+        public string FullName { get; set; }
+
+        [Display(Name = "Género")]
+        public string Gender { get; set; }
+
+        [Display(Name = "Data de Nascimento")]
+        public DateTime? BirthDate { get; set; }
+
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }
@@ -83,4 +93,24 @@ namespace PI_BackOffice.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+    public class EditViewModel
+    {
+        [Key]
+        [Display(Name = "UserId")]
+        public string userId { get; set; }
+
+        [Required]
+        [Display(Name = "Nome Completo")]
+        public string FullName { get; set; }
+
+        [Required]
+        [Display(Name = "Género")]
+        public string Gender { get; set; }
+
+        [Required]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Data de Nascimento")]
+        public DateTime? BirthDate { get; set; }
+    }
+
 }

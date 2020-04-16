@@ -17,17 +17,20 @@ namespace PI_API.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Encomenda()
         {
+            this.Encomenda_Menu_Produto = new HashSet<Encomenda_Menu_Produto>();
             this.Encomenda_Produto_Ingrediente = new HashSet<Encomenda_Produto_Ingrediente>();
         }
     
         public int ID { get; set; }
         public System.DateTime DataEncomenda { get; set; }
-        public System.DateTime DataProcessamento { get; set; }
-        public System.DateTime DataLevantamento { get; set; }
+        public System.DateTime DataRecolha { get; set; }
+        public System.DateTime DataEntrega { get; set; }
         public int Estado { get; set; }
-        public string ClienteID { get; set; }
+        public string User_ID { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Encomenda_Menu_Produto> Encomenda_Menu_Produto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Encomenda_Produto_Ingrediente> Encomenda_Produto_Ingrediente { get; set; }
     }

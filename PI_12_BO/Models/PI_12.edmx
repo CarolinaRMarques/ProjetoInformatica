@@ -1,0 +1,1098 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="pi_12Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" />
+          <Property Name="FullName" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Classe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Encomenda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataEncomenda" Type="datetime" Nullable="false" />
+          <Property Name="DataRecolha" Type="datetime" Nullable="false" />
+          <Property Name="DataEntrega" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="User_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Encomenda_Menu_Produto">
+          <Key>
+            <PropertyRef Name="Encomenda_ID" />
+            <PropertyRef Name="Produto_ID" />
+            <PropertyRef Name="Menu_ID" />
+          </Key>
+          <Property Name="Encomenda_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Produto_ID" Type="int" Nullable="false" />
+          <Property Name="Menu_ID" Type="int" Nullable="false" />
+          <Property Name="Quantidade" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PrecoBase" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Encomenda_Produto_Ingrediente">
+          <Key>
+            <PropertyRef Name="Encomenda_ID" />
+            <PropertyRef Name="Produto_ID" />
+            <PropertyRef Name="Ingrediente_ID" />
+          </Key>
+          <Property Name="Encomenda_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Produto_ID" Type="int" Nullable="false" />
+          <Property Name="Ingrediente_ID" Type="int" Nullable="false" />
+          <Property Name="Quantidade" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PrecoBase" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ingrediente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="PrecoBase" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Imagem" Type="varchar" MaxLength="1024" />
+          <Property Name="Disponivel" Type="bit" Nullable="false" />
+          <Property Name="Quente" Type="bit" />
+          <Property Name="Frio" Type="bit" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="1024" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu_Produto">
+          <Key>
+            <PropertyRef Name="Menu_ID" />
+            <PropertyRef Name="Produto_ID" />
+          </Key>
+          <Property Name="Menu_ID" Type="int" Nullable="false" />
+          <Property Name="Produto_ID" Type="int" Nullable="false" />
+          <Property Name="Quantidade" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="PrecoBase" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Imagem" Type="varchar" MaxLength="1024" />
+          <Property Name="Classe_ID" Type="int" Nullable="false" />
+          <Property Name="SubProduto_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Produto_Ingrediente">
+          <Key>
+            <PropertyRef Name="Produto_ID" />
+            <PropertyRef Name="Ingrediente_ID" />
+          </Key>
+          <Property Name="Produto_ID" Type="int" Nullable="false" />
+          <Property Name="Ingrediente_ID" Type="int" Nullable="false" />
+          <Property Name="Quantidade" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Encomenda" Type="Self.Encomenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Encomenda">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Menu_Produto_Encomenda">
+          <End Role="Encomenda" Type="Self.Encomenda" Multiplicity="1" />
+          <End Role="Encomenda_Menu_Produto" Type="Self.Encomenda_Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Encomenda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Menu_Produto">
+              <PropertyRef Name="Encomenda_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Menu_Produto_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Encomenda_Menu_Produto" Type="Self.Encomenda_Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Menu_Produto">
+              <PropertyRef Name="Menu_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Menu_Produto_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Encomenda_Menu_Produto" Type="Self.Encomenda_Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Menu_Produto">
+              <PropertyRef Name="Produto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Produto_Ingrediente_Encomenda1">
+          <End Role="Encomenda" Type="Self.Encomenda" Multiplicity="1" />
+          <End Role="Encomenda_Produto_Ingrediente" Type="Self.Encomenda_Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Encomenda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Produto_Ingrediente">
+              <PropertyRef Name="Encomenda_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Produto_Ingrediente_Ingrediente">
+          <End Role="Ingrediente" Type="Self.Ingrediente" Multiplicity="1" />
+          <End Role="Encomenda_Produto_Ingrediente" Type="Self.Encomenda_Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingrediente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Produto_Ingrediente">
+              <PropertyRef Name="Ingrediente_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Produto_Ingrediente_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Encomenda_Produto_Ingrediente" Type="Self.Encomenda_Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Produto_Ingrediente">
+              <PropertyRef Name="Produto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Produto_Menu2">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Menu_Produto" Type="Self.Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu_Produto">
+              <PropertyRef Name="Menu_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Produto_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Menu_Produto" Type="Self.Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu_Produto">
+              <PropertyRef Name="Produto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produto_Classe1">
+          <End Role="Classe" Type="Self.Classe" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="Classe_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produto_Ingrediente_Ingrediente">
+          <End Role="Ingrediente" Type="Self.Ingrediente" Multiplicity="1" />
+          <End Role="Produto_Ingrediente" Type="Self.Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingrediente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto_Ingrediente">
+              <PropertyRef Name="Ingrediente_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produto_Ingrediente_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Produto_Ingrediente" Type="Self.Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto_Ingrediente">
+              <PropertyRef Name="Produto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produto_Produto1">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="0..1" />
+          <End Role="Produto1" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto1">
+              <PropertyRef Name="SubProduto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pi_12ModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Classe" EntityType="Self.Classe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Encomenda" EntityType="Self.Encomenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Encomenda_Menu_Produto" EntityType="Self.Encomenda_Menu_Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Encomenda_Produto_Ingrediente" EntityType="Self.Encomenda_Produto_Ingrediente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingrediente" EntityType="Self.Ingrediente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu_Produto" EntityType="Self.Menu_Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto_Ingrediente" EntityType="Self.Produto_Ingrediente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_AspNetUsers" Association="Self.FK_Encomenda_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Encomenda" EntitySet="Encomenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Menu_Produto_Encomenda" Association="Self.FK_Encomenda_Menu_Produto_Encomenda">
+            <End Role="Encomenda" EntitySet="Encomenda" />
+            <End Role="Encomenda_Menu_Produto" EntitySet="Encomenda_Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Menu_Produto_Menu" Association="Self.FK_Encomenda_Menu_Produto_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Encomenda_Menu_Produto" EntitySet="Encomenda_Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Menu_Produto_Produto" Association="Self.FK_Encomenda_Menu_Produto_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Encomenda_Menu_Produto" EntitySet="Encomenda_Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Encomenda1" Association="Self.FK_Encomenda_Produto_Ingrediente_Encomenda1">
+            <End Role="Encomenda" EntitySet="Encomenda" />
+            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Ingrediente" Association="Self.FK_Encomenda_Produto_Ingrediente_Ingrediente">
+            <End Role="Ingrediente" EntitySet="Ingrediente" />
+            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Produto" Association="Self.FK_Encomenda_Produto_Ingrediente_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Produto_Menu2" Association="Self.FK_Menu_Produto_Menu2">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu_Produto" EntitySet="Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Produto_Produto" Association="Self.FK_Menu_Produto_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Menu_Produto" EntitySet="Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produto_Classe1" Association="Self.FK_Produto_Classe1">
+            <End Role="Classe" EntitySet="Classe" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produto_Ingrediente_Ingrediente" Association="Self.FK_Produto_Ingrediente_Ingrediente">
+            <End Role="Ingrediente" EntitySet="Ingrediente" />
+            <End Role="Produto_Ingrediente" EntitySet="Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produto_Ingrediente_Produto" Association="Self.FK_Produto_Ingrediente_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Produto_Ingrediente" EntitySet="Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produto_Produto1" Association="Self.FK_Produto_Produto1">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Produto1" EntitySet="Produto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pi_12Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="pi_12Model.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="pi_12Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="pi_12Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityContainer Name="pi_12Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="pi_12Model.AspNetUsers" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="pi_12Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="pi_12Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="pi_12Model.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Ingrediente" EntityType="pi_12Model.Ingrediente" />
+          <EntitySet Name="Produto" EntityType="pi_12Model.Produto" />
+          <AssociationSet Name="FK_Produto_Produto" Association="pi_12Model.FK_Produto_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Produto1" EntitySet="Produto" />
+          </AssociationSet>
+          <EntitySet Name="Encomenda" EntityType="pi_12Model.Encomenda" />
+          <AssociationSet Name="FK_Encomenda_AspNetUsers" Association="pi_12Model.FK_Encomenda_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Encomenda" EntitySet="Encomenda" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="pi_12Model.sysdiagrams" />
+          <EntitySet Name="Encomenda_Produto_Ingrediente" EntityType="pi_12Model.Encomenda_Produto_Ingrediente" />
+          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Encomenda1" Association="pi_12Model.FK_Encomenda_Produto_Ingrediente_Encomenda1">
+            <End Role="Encomenda" EntitySet="Encomenda" />
+            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Ingrediente" Association="pi_12Model.FK_Encomenda_Produto_Ingrediente_Ingrediente">
+            <End Role="Ingrediente" EntitySet="Ingrediente" />
+            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Produto_Ingrediente_Produto" Association="pi_12Model.FK_Encomenda_Produto_Ingrediente_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Encomenda_Produto_Ingrediente" EntitySet="Encomenda_Produto_Ingrediente" />
+          </AssociationSet>
+          <EntitySet Name="Classe" EntityType="pi_12Model.Classe" />
+          <EntitySet Name="Encomenda_Menu_Produto" EntityType="pi_12Model.Encomenda_Menu_Produto" />
+          <EntitySet Name="Menu" EntityType="pi_12Model.Menu" />
+          <EntitySet Name="Menu_Produto" EntityType="pi_12Model.Menu_Produto" />
+          <EntitySet Name="Produto_Ingrediente" EntityType="pi_12Model.Produto_Ingrediente" />
+          <AssociationSet Name="FK_Produto_Classe1" Association="pi_12Model.FK_Produto_Classe1">
+            <End Role="Classe" EntitySet="Classe" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Menu_Produto_Encomenda" Association="pi_12Model.FK_Encomenda_Menu_Produto_Encomenda">
+            <End Role="Encomenda" EntitySet="Encomenda" />
+            <End Role="Encomenda_Menu_Produto" EntitySet="Encomenda_Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Menu_Produto_Menu" Association="pi_12Model.FK_Encomenda_Menu_Produto_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Encomenda_Menu_Produto" EntitySet="Encomenda_Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomenda_Menu_Produto_Produto" Association="pi_12Model.FK_Encomenda_Menu_Produto_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Encomenda_Menu_Produto" EntitySet="Encomenda_Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produto_Ingrediente_Ingrediente" Association="pi_12Model.FK_Produto_Ingrediente_Ingrediente">
+            <End Role="Ingrediente" EntitySet="Ingrediente" />
+            <End Role="Produto_Ingrediente" EntitySet="Produto_Ingrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Produto_Menu2" Association="pi_12Model.FK_Menu_Produto_Menu2">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu_Produto" EntitySet="Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Produto_Produto" Association="pi_12Model.FK_Menu_Produto_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Menu_Produto" EntitySet="Menu_Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produto_Ingrediente_Produto" Association="pi_12Model.FK_Produto_Ingrediente_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Produto_Ingrediente" EntitySet="Produto_Ingrediente" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="pi_12Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="pi_12Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="pi_12Model.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Encomenda" Relationship="pi_12Model.FK_Encomenda_AspNetUsers" FromRole="AspNetUsers" ToRole="Encomenda" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="pi_12Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="pi_12Model.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="pi_12Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="pi_12Model.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="pi_12Model.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="pi_12Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Ingrediente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="PrecoBase" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Imagem" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="Disponivel" Type="Boolean" Nullable="false" />
+          <Property Name="Quente" Type="Boolean" />
+          <Property Name="Frio" Type="Boolean" />
+          <NavigationProperty Name="Encomenda_Produto_Ingrediente" Relationship="pi_12Model.FK_Encomenda_Produto_Ingrediente_Ingrediente" FromRole="Ingrediente" ToRole="Encomenda_Produto_Ingrediente" />
+          <NavigationProperty Name="Produto_Ingrediente" Relationship="pi_12Model.FK_Produto_Ingrediente_Ingrediente" FromRole="Ingrediente" ToRole="Produto_Ingrediente" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="PrecoBase" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Imagem" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="Classe_ID" Type="Int32" Nullable="false" />
+          <Property Name="SubProduto_ID" Type="Int32" />
+          <NavigationProperty Name="Produto1" Relationship="pi_12Model.FK_Produto_Produto" FromRole="Produto" ToRole="Produto1" />
+          <NavigationProperty Name="Produto2" Relationship="pi_12Model.FK_Produto_Produto" FromRole="Produto1" ToRole="Produto" />
+          <NavigationProperty Name="Encomenda_Produto_Ingrediente" Relationship="pi_12Model.FK_Encomenda_Produto_Ingrediente_Produto" FromRole="Produto" ToRole="Encomenda_Produto_Ingrediente" />
+          <NavigationProperty Name="Classe" Relationship="pi_12Model.FK_Produto_Classe1" FromRole="Produto" ToRole="Classe" />
+          <NavigationProperty Name="Encomenda_Menu_Produto" Relationship="pi_12Model.FK_Encomenda_Menu_Produto_Produto" FromRole="Produto" ToRole="Encomenda_Menu_Produto" />
+          <NavigationProperty Name="Menu_Produto" Relationship="pi_12Model.FK_Menu_Produto_Produto" FromRole="Produto" ToRole="Menu_Produto" />
+          <NavigationProperty Name="Produto_Ingrediente" Relationship="pi_12Model.FK_Produto_Ingrediente_Produto" FromRole="Produto" ToRole="Produto_Ingrediente" />
+        </EntityType>
+        <Association Name="FK_Produto_Produto">
+          <End Type="pi_12Model.Produto" Role="Produto" Multiplicity="0..1" />
+          <End Type="pi_12Model.Produto" Role="Produto1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto1">
+              <PropertyRef Name="SubProduto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Encomenda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataEncomenda" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataRecolha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataEntrega" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="pi_12Model.FK_Encomenda_AspNetUsers" FromRole="Encomenda" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Encomenda_Produto_Ingrediente" Relationship="pi_12Model.FK_Encomenda_Produto_Ingrediente_Encomenda1" FromRole="Encomenda" ToRole="Encomenda_Produto_Ingrediente" />
+          <NavigationProperty Name="Encomenda_Menu_Produto" Relationship="pi_12Model.FK_Encomenda_Menu_Produto_Encomenda" FromRole="Encomenda" ToRole="Encomenda_Menu_Produto" />
+        </EntityType>
+        <Association Name="FK_Encomenda_AspNetUsers">
+          <End Type="pi_12Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="pi_12Model.Encomenda" Role="Encomenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Encomenda">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Encomenda_Produto_Ingrediente">
+          <Key>
+            <PropertyRef Name="Encomenda_ID" />
+            <PropertyRef Name="Produto_ID" />
+            <PropertyRef Name="Ingrediente_ID" />
+          </Key>
+          <Property Name="Encomenda_ID" Type="Int32" Nullable="false" />
+          <Property Name="Produto_ID" Type="Int32" Nullable="false" />
+          <Property Name="Ingrediente_ID" Type="Int32" Nullable="false" />
+          <Property Name="Quantidade" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PrecoBase" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Encomenda" Relationship="pi_12Model.FK_Encomenda_Produto_Ingrediente_Encomenda1" FromRole="Encomenda_Produto_Ingrediente" ToRole="Encomenda" />
+          <NavigationProperty Name="Ingrediente" Relationship="pi_12Model.FK_Encomenda_Produto_Ingrediente_Ingrediente" FromRole="Encomenda_Produto_Ingrediente" ToRole="Ingrediente" />
+          <NavigationProperty Name="Produto" Relationship="pi_12Model.FK_Encomenda_Produto_Ingrediente_Produto" FromRole="Encomenda_Produto_Ingrediente" ToRole="Produto" />
+        </EntityType>
+        <Association Name="FK_Encomenda_Produto_Ingrediente_Encomenda1">
+          <End Type="pi_12Model.Encomenda" Role="Encomenda" Multiplicity="1" />
+          <End Type="pi_12Model.Encomenda_Produto_Ingrediente" Role="Encomenda_Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Encomenda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Produto_Ingrediente">
+              <PropertyRef Name="Encomenda_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Produto_Ingrediente_Ingrediente">
+          <End Type="pi_12Model.Ingrediente" Role="Ingrediente" Multiplicity="1" />
+          <End Type="pi_12Model.Encomenda_Produto_Ingrediente" Role="Encomenda_Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingrediente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Produto_Ingrediente">
+              <PropertyRef Name="Ingrediente_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Produto_Ingrediente_Produto">
+          <End Type="pi_12Model.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="pi_12Model.Encomenda_Produto_Ingrediente" Role="Encomenda_Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Produto_Ingrediente">
+              <PropertyRef Name="Produto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Classe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Produto" Relationship="pi_12Model.FK_Produto_Classe1" FromRole="Classe" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Encomenda_Menu_Produto">
+          <Key>
+            <PropertyRef Name="Encomenda_ID" />
+            <PropertyRef Name="Produto_ID" />
+            <PropertyRef Name="Menu_ID" />
+          </Key>
+          <Property Name="Encomenda_ID" Type="Int32" Nullable="false" />
+          <Property Name="Produto_ID" Type="Int32" Nullable="false" />
+          <Property Name="Menu_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantidade" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PrecoBase" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Encomenda" Relationship="pi_12Model.FK_Encomenda_Menu_Produto_Encomenda" FromRole="Encomenda_Menu_Produto" ToRole="Encomenda" />
+          <NavigationProperty Name="Menu" Relationship="pi_12Model.FK_Encomenda_Menu_Produto_Menu" FromRole="Encomenda_Menu_Produto" ToRole="Menu" />
+          <NavigationProperty Name="Produto" Relationship="pi_12Model.FK_Encomenda_Menu_Produto_Produto" FromRole="Encomenda_Menu_Produto" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Encomenda_Menu_Produto" Relationship="pi_12Model.FK_Encomenda_Menu_Produto_Menu" FromRole="Menu" ToRole="Encomenda_Menu_Produto" />
+          <NavigationProperty Name="Menu_Produto" Relationship="pi_12Model.FK_Menu_Produto_Menu2" FromRole="Menu" ToRole="Menu_Produto" />
+        </EntityType>
+        <EntityType Name="Menu_Produto">
+          <Key>
+            <PropertyRef Name="Menu_ID" />
+            <PropertyRef Name="Produto_ID" />
+          </Key>
+          <Property Name="Menu_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Produto_ID" Type="Int32" Nullable="false" />
+          <Property Name="Quantidade" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Menu" Relationship="pi_12Model.FK_Menu_Produto_Menu2" FromRole="Menu_Produto" ToRole="Menu" />
+          <NavigationProperty Name="Produto" Relationship="pi_12Model.FK_Menu_Produto_Produto" FromRole="Menu_Produto" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Produto_Ingrediente">
+          <Key>
+            <PropertyRef Name="Produto_ID" />
+            <PropertyRef Name="Ingrediente_ID" />
+          </Key>
+          <Property Name="Produto_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ingrediente_ID" Type="Int32" Nullable="false" />
+          <Property Name="Quantidade" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ingrediente" Relationship="pi_12Model.FK_Produto_Ingrediente_Ingrediente" FromRole="Produto_Ingrediente" ToRole="Ingrediente" />
+          <NavigationProperty Name="Produto" Relationship="pi_12Model.FK_Produto_Ingrediente_Produto" FromRole="Produto_Ingrediente" ToRole="Produto" />
+        </EntityType>
+        <Association Name="FK_Produto_Classe1">
+          <End Type="pi_12Model.Classe" Role="Classe" Multiplicity="1" />
+          <End Type="pi_12Model.Produto" Role="Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="Classe_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Menu_Produto_Encomenda">
+          <End Type="pi_12Model.Encomenda" Role="Encomenda" Multiplicity="1" />
+          <End Type="pi_12Model.Encomenda_Menu_Produto" Role="Encomenda_Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Encomenda">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Menu_Produto">
+              <PropertyRef Name="Encomenda_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Menu_Produto_Menu">
+          <End Type="pi_12Model.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="pi_12Model.Encomenda_Menu_Produto" Role="Encomenda_Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Menu_Produto">
+              <PropertyRef Name="Menu_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomenda_Menu_Produto_Produto">
+          <End Type="pi_12Model.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="pi_12Model.Encomenda_Menu_Produto" Role="Encomenda_Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Encomenda_Menu_Produto">
+              <PropertyRef Name="Produto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produto_Ingrediente_Ingrediente">
+          <End Type="pi_12Model.Ingrediente" Role="Ingrediente" Multiplicity="1" />
+          <End Type="pi_12Model.Produto_Ingrediente" Role="Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingrediente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto_Ingrediente">
+              <PropertyRef Name="Ingrediente_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Produto_Menu2">
+          <End Type="pi_12Model.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="pi_12Model.Menu_Produto" Role="Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu_Produto">
+              <PropertyRef Name="Menu_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Produto_Produto">
+          <End Type="pi_12Model.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="pi_12Model.Menu_Produto" Role="Menu_Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu_Produto">
+              <PropertyRef Name="Produto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produto_Ingrediente_Produto">
+          <End Type="pi_12Model.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="pi_12Model.Produto_Ingrediente" Role="Produto_Ingrediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Produto_Ingrediente">
+              <PropertyRef Name="Produto_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pi_12ModelStoreContainer" CdmEntityContainer="pi_12Entities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="pi_12Model.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="pi_12Model.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="pi_12Model.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="pi_12Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="pi_12Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Ingrediente">
+            <EntityTypeMapping TypeName="pi_12Model.Ingrediente">
+              <MappingFragment StoreEntitySet="Ingrediente">
+                <ScalarProperty Name="Frio" ColumnName="Frio" />
+                <ScalarProperty Name="Quente" ColumnName="Quente" />
+                <ScalarProperty Name="Disponivel" ColumnName="Disponivel" />
+                <ScalarProperty Name="Imagem" ColumnName="Imagem" />
+                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="pi_12Model.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="SubProduto_ID" ColumnName="SubProduto_ID" />
+                <ScalarProperty Name="Classe_ID" ColumnName="Classe_ID" />
+                <ScalarProperty Name="Imagem" ColumnName="Imagem" />
+                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Encomenda">
+            <EntityTypeMapping TypeName="pi_12Model.Encomenda">
+              <MappingFragment StoreEntitySet="Encomenda">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="DataEntrega" ColumnName="DataEntrega" />
+                <ScalarProperty Name="DataRecolha" ColumnName="DataRecolha" />
+                <ScalarProperty Name="DataEncomenda" ColumnName="DataEncomenda" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="pi_12Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Encomenda_Produto_Ingrediente">
+            <EntityTypeMapping TypeName="pi_12Model.Encomenda_Produto_Ingrediente">
+              <MappingFragment StoreEntitySet="Encomenda_Produto_Ingrediente">
+                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="Ingrediente_ID" ColumnName="Ingrediente_ID" />
+                <ScalarProperty Name="Produto_ID" ColumnName="Produto_ID" />
+                <ScalarProperty Name="Encomenda_ID" ColumnName="Encomenda_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classe">
+            <EntityTypeMapping TypeName="pi_12Model.Classe">
+              <MappingFragment StoreEntitySet="Classe">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Encomenda_Menu_Produto">
+            <EntityTypeMapping TypeName="pi_12Model.Encomenda_Menu_Produto">
+              <MappingFragment StoreEntitySet="Encomenda_Menu_Produto">
+                <ScalarProperty Name="PrecoBase" ColumnName="PrecoBase" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+                <ScalarProperty Name="Produto_ID" ColumnName="Produto_ID" />
+                <ScalarProperty Name="Encomenda_ID" ColumnName="Encomenda_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="pi_12Model.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu_Produto">
+            <EntityTypeMapping TypeName="pi_12Model.Menu_Produto">
+              <MappingFragment StoreEntitySet="Menu_Produto">
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="Produto_ID" ColumnName="Produto_ID" />
+                <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto_Ingrediente">
+            <EntityTypeMapping TypeName="pi_12Model.Produto_Ingrediente">
+              <MappingFragment StoreEntitySet="Produto_Ingrediente">
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="Ingrediente_ID" ColumnName="Ingrediente_ID" />
+                <ScalarProperty Name="Produto_ID" ColumnName="Produto_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

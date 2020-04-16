@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -10,7 +11,6 @@ using PI_BackOffice.Models;
 
 namespace PI_BackOffice.Controllers
 {
-    [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -32,9 +32,9 @@ namespace PI_BackOffice.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -70,7 +70,10 @@ namespace PI_BackOffice.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                BirthDate = GetBirthDate(),
+                FullName = GetFullName(),
+                Gender = GetGender()
             };
             return View(model);
         }
@@ -333,7 +336,7 @@ namespace PI_BackOffice.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +387,80 @@ namespace PI_BackOffice.Controllers
             Error
         }
 
-#endregion
+        private DateTime? GetBirthDate()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.BirthDate.Value.Date;
+            }
+            return null;
+
+        }
+        private string GetFullName()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.FullName;
+            }
+            return null;
+
+        }
+        private string GetGender()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.Gender;
+            }
+            return null;
+
+        }
+        #endregion
+
+        #region jsp Methods
+        public ActionResult EditUser()
+        {
+            var model = new EditViewModel
+            {
+                userId = User.Identity.GetUserId(),
+                BirthDate = GetBirthDate(),
+                FullName = GetFullName(),
+                Gender = GetGender()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUser([Bind(Include = "userId,BirthDate,FullName,Gender")] EditViewModel editUser)
+        {
+            if (ModelState.IsValid)
+            {
+              
+                ProjInformaticaEntities db = new ProjInformaticaEntities();
+                var user = db.AspNetUsers.Find(editUser.userId);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                if (editUser.userId == user.Id)
+                {
+                    user.BirthDate = editUser.BirthDate;
+                    user.FullName = editUser.FullName;
+                    user.Gender = editUser.Gender;
+
+                    db.Entry(user).State = EntityState.Modified;
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return View(editUser);
+
+        }
+        #endregion
     }
 }

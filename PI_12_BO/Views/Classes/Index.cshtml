@@ -1,0 +1,30 @@
+﻿@model IEnumerable<PI_12_BO.Models.Classe>
+
+@{
+    ViewBag.Title = "Classes - Lista";
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th></th>
+        </tr>
+    </thead>
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+        <td class="text-right">
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }, new { @class="btn btn-default btn-xs"})
+            @Html.ActionLink("Details", "Details", new { id=item.ID }, new { @class = "btn btn-default btn-xs" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "btn btn-default btn-xs" })
+        </td>
+    </tr>
+}
+
+</table>

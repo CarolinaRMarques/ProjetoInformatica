@@ -1,0 +1,40 @@
+﻿@model IEnumerable<PI_12_BO.Models.Produto_Ingrediente>
+<p>
+    <a class="btn btn-default" title="Adicionar Ingrediente" data-toggle="modal" data-target="#myModal">Create New</a>
+</p>
+@if (Model.Count() > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="col-sm-4">@Html.DisplayNameFor(model => model.Ingrediente.Nome)</th>
+                <th class="col-sm-2 text-center">@Html.DisplayNameFor(model => model.Quantidade)</th>
+                <th class="col-sm-2 text-center">@Html.DisplayNameFor(model => model.Ingrediente.PrecoBase)</th>
+                <th class="col-sm-2 text-center">@Html.DisplayNameFor(model => model.Ingrediente.Disponivel)</th>
+                <th class="col-sm-2"></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Ingrediente.Nome)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.Ingrediente.PrecoBase) €</td>
+                <td class="text-center">@Html.DisplayFor(modelItem => item.Ingrediente.Disponivel)</td>
+                <td class="text-right">
+                    <a href="#removeModal" data-toggle="modal" data-produtoid="@item.Produto_ID" data-produtonome="@item.Produto.Nome" data-ingredienteid="@item.Ingrediente.ID" data-ingredientenome="@item.Ingrediente.Nome" data-quantidade="@item.Quantidade" title="Remover Ingrediente do Produto" class="btn btn-default btn-sm removeItem">Remove</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="bs-callout bs-callout-info">
+        <h4><i class="fa fa-info-circle"></i> Informação</h4>
+        <p>Não existem, neste momento, elementos para representar.</p>
+    </div>
+}
+@Html.Action("_IngredientesParaProduto", "Produtos_Ingredientes", new { Produto_ID = @ViewBag.Produto_ID })
+@Html.Action("_IngredienteEmProduto", "Produtos_Ingredientes", new { Produto_ID = @ViewBag.Produto_ID, Ingrediente_ID = 1 })
+

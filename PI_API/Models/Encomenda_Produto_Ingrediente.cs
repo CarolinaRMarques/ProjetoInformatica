@@ -14,10 +14,10 @@ namespace PI_API.Models
     
     public partial class Encomenda_Produto_Ingrediente
     {
-        public int EncomendaID { get; set; }
-        public int ProdutoID { get; set; }
-        public int IngredienteID { get; set; }
-        public int Quantidade { get; set; }
+        public int Encomenda_ID { get; set; }
+        public int Produto_ID { get; set; }
+        public int Ingrediente_ID { get; set; }
+        public string Quantidade { get; set; }
         public decimal PrecoBase { get; set; }
     
         public virtual Encomenda Encomenda { get; set; }

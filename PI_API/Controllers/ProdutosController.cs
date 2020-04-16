@@ -25,14 +25,12 @@ namespace PI_API.Controllers
             .Select(x => new DTO_Produto()
             {
                 ID = x.ID,
-                ClasseID = x.ClasseID,
-                ClasseNome = x.Classe.Nome,
+                Classe_ID = x.Classe_ID,
                 Imagem = x.Imagem,
                 Nome = x.Nome,
                 PrecoBase = x.PrecoBase,
-                ProdutoPaiID = x.ProdutoPaiID,
-                SubProdutoNome = x.Produto2.Nome,
-                Ingredientes = x.ProdutoIngrediente.Count()
+                SubProduto_ID = x.SubProduto_ID,    
+                Ingredientes = x.Produto_Ingrediente.Count()
                 });
             return retval;
         }
